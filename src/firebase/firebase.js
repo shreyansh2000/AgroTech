@@ -2,14 +2,13 @@ import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyDGH1EXCdr41OZolHiPiyftzPm8bvKmL6Y",
-    authDomain: "tomato-disease-identific-ba6d4.firebaseapp.com",
-    databaseURL: "https://tomato-disease-identific-ba6d4-default-rtdb.firebaseio.com",
-    projectId: "tomato-disease-identific-ba6d4",
-    storageBucket: "tomato-disease-identific-ba6d4.appspot.com",
-    messagingSenderId: "374304704954",
-    appId: "1:374304704954:web:63464cfd88377e3d663583",
-    measurementId: "G-EMBHG6QXGT"
+  apiKey: "AIzaSyCOBFMnoPcvW_OSIHy5j0OulI2UCz10Gt0",
+  authDomain: "tomatocrop-66f6d.firebaseapp.com",
+  databaseURL: "https://tomatocrop-66f6d-default-rtdb.firebaseio.com",
+  projectId: "tomatocrop-66f6d",
+  storageBucket: "tomatocrop-66f6d.appspot.com",
+  messagingSenderId: "774873843581",
+  appId: "1:774873843581:web:bdd38f5ba283380e1c2e14"
   };
 
 const app = initializeApp(firebaseConfig);

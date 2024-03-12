@@ -28,8 +28,12 @@ const Header = () => {
           {/* 2nd menu part  */}
           <div
             className={
+
+
               showMediaIcons ? "menu-link mobile-menu-link" : "menu-link"
-            }>
+
+            }
+            >
             <ul>
               <li>
                 <NavLink to="/">Home</NavLink>

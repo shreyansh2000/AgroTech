@@ -1,19 +1,19 @@
 import Login from "./components/auth/login";
 import Register from "./components/auth/register";
-import WelcomeScreen from "./components/WelcomeScreen/WelcomeScreen";
 import Welcome from "./components/WelcomeScreen/Welcome";
-
+import AboutUs from "./components/AboutUs";
 import Header from "./components/header";
 import Home from "./components/home";
 
 import { AuthProvider } from "./contexts/authContext";
 import { useRoutes } from "react-router-dom";
+import CameraComponent from "./components/IntegrateModel";
 
 function App() {
   const routesArray = [
     {
       path: "*",
-      element: <Login />,
+      element: <Welcome />,
     },
     {
       path: "/login",
@@ -28,12 +28,16 @@ function App() {
       element: <Home />,
     },
     {
-      path: "/WelcomeScreen",
-      element: <WelcomeScreen />,
-    },
-    {
       path: "/Welcome",
       element: <Welcome />,
+    },
+    {
+      path: "/model",
+      element: <CameraComponent />,
+    },
+    {
+      path: "/AboutUs",
+      element: <AboutUs />,
     },
   ];
   let routesElement = useRoutes(routesArray);
@@ -41,6 +45,7 @@ function App() {
     <AuthProvider>
       <Header />
       <div className="w-full h-screen flex flex-col">{routesElement}</div>
+      <AboutUs/>
     </AuthProvider>
   );
 }

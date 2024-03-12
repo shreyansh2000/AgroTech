@@ -1,170 +1,110 @@
 import React from 'react'
 import { useAuth } from '../../contexts/authContext'
-import {
-    Card,
-    CardBody,
-    CardFooter,
-    Typography,
-    Button,
-    Input,
-  } from "@material-tailwind/react";
-
+import { FaSearch } from "react-icons/fa";
 
 const Home = () => {
     const { currentUser } = useAuth()
+
+
+  const onTakePicture = () => {
+ console.log("take a picture")
+  };
     return (
-        <div>
+      <>
+       <div className="flex items-center justify-center h-screen">
+    
+      
 
-             {/*  Search Button */}  
-        <div>       
-       
+    <div className="grid mb-8 border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 md:mb-12 md:grid-cols-2 bg-white dark:bg-gray-800">
+    <figure className="flex flex-col items-center justify-center p-8 text-center bg-white border-b border-gray-200 rounded-t-lg md:rounded-t-none md:rounded-ss-lg md:border-e dark:bg-gray-800 dark:border-gray-700">
+        <blockquote className="max-w-2xl mx-auto mb-4 text-gray-500 lg:mb-8 dark:text-gray-400">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Very easy this was to integrate</h3>
+            <p className="my-4">If you care for your time, I hands down would go with this."</p>
+        </blockquote>
+        <figcaption className="flex items-center justify-center ">
+            <img className="rounded-full w-9 h-9" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/karen-nelson.png" alt="profile picture"/>
+            <div className="space-y-0.5 font-medium dark:text-white text-left rtl:text-right ms-3">
+                <div>Bonnie Green</div>
+                <div className="text-sm text-gray-500 dark:text-gray-400 ">Developer at Open AI</div>
+            </div>
+        </figcaption>    
+    </figure>
+    <figure className="flex flex-col items-center justify-center p-8 text-center bg-white border-b border-gray-200 md:rounded-se-lg dark:bg-gray-800 dark:border-gray-700">
+        <blockquote className="max-w-2xl mx-auto mb-4 text-gray-500 lg:mb-8 dark:text-gray-400">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Solid foundation for any project</h3>
+            <p className="my-4">Designing with Figma components that can be easily translated to the utility classes of Tailwind CSS is a huge timesaver!"</p>
+        </blockquote>
+        <figcaption className="flex items-center justify-center ">
+            <img className="rounded-full w-9 h-9" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/roberta-casas.png" alt="profile picture"/>
+            <div className="space-y-0.5 font-medium dark:text-white text-left rtl:text-right ms-3">
+                <div>Roberta Casas</div>
+                <div className="text-sm text-gray-500 dark:text-gray-400">Lead designer at Dropbox</div>
+            </div>
+        </figcaption>    
+    </figure>
+    <figure className="flex flex-col items-center justify-center p-8 text-center bg-white border-b border-gray-200 md:rounded-es-lg md:border-b-0 md:border-e dark:bg-gray-800 dark:border-gray-700">
+        <blockquote className="max-w-2xl mx-auto mb-4 text-gray-500 lg:mb-8 dark:text-gray-400">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Mindblowing workflow</h3>
+            <p className="my-4">Aesthetically, the well designed components are beautiful and will undoubtedly level up your next application."</p>
+        </blockquote>
+        <figcaption className="flex items-center justify-center ">
+            <img className="rounded-full w-9 h-9" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/jese-leos.png" alt="profile picture"/>
+            <div className="space-y-0.5 font-medium dark:text-white text-left rtl:text-right ms-3">
+                <div>Jese Leos</div>
+                <div className="text-sm text-gray-500 dark:text-gray-400">Software Engineer at Facebook</div>
+            </div>
+        </figcaption>    
+    </figure>
+    <figure className="flex flex-col items-center justify-center p-8 text-center bg-white border-gray-200 rounded-b-lg md:rounded-se-lg dark:bg-gray-800 dark:border-gray-700">
+        <blockquote className="max-w-2xl mx-auto mb-4 text-gray-500 lg:mb-8 dark:text-gray-400">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Efficient Collaborating</h3>
+            <p className="my-4">You have many examples that can be used to create a fast prototype for your team."</p>
+        </blockquote>
+        <figcaption className="flex items-center justify-center ">
+            <img className="rounded-full w-9 h-9" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/joseph-mcfall.png" alt="profile picture"/>
+            <div className="space-y-0.5 font-medium dark:text-white text-left rtl:text-right ms-3">
+                <div>Joseph McFall</div>
+                <div className="text-sm text-gray-500 dark:text-gray-400">CTO at Google</div>
+            </div>
+        </figcaption>    
+    </figure>
+    </div>
 
-        </div>
+  
 
 
-        {/*  Cards */}
-        <div className='flex justify-center mx-auto' style={{ marginTop: 400, fontSize: 20 }}>
-      <Card className="mt-6 w-96">
-      <CardBody>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          fill="currentColor"
-          className="mb-4 h-12 w-12 text-gray-900"
-        >
-          <path
-            fillRule="evenodd"
-            d="M9.315 7.584C12.195 3.883 16.695 1.5 21.75 1.5a.75.75 0 01.75.75c0 5.056-2.383 9.555-6.084 12.436A6.75 6.75 0 019.75 22.5a.75.75 0 01-.75-.75v-4.131A15.838 15.838 0 016.382 15H2.25a.75.75 0 01-.75-.75 6.75 6.75 0 017.815-6.666zM15 6.75a2.25 2.25 0 100 4.5 2.25 2.25 0 000-4.5z"
-            clipRule="evenodd"
-          />
-          <path d="M5.26 17.242a.75.75 0 10-.897-1.203 5.243 5.243 0 00-2.05 5.022.75.75 0 00.625.627 5.243 5.243 0 005.022-2.051.75.75 0 10-1.202-.897 3.744 3.744 0 01-3.008 1.51c0-1.23.592-2.323 1.51-3.008z" />
-        </svg>
-        <Typography variant="h5" color="blue-gray" className="mb-2">
-          UI/UX Review Check
-        </Typography>
-        <Typography>
-          Because it&apos;s about motivating the doers. Because I&apos;m here to
-          follow my dreams and inspire others.
-        </Typography>
-      </CardBody>
-      <CardFooter className="pt-0">
-        <a href="#" className="inline-block">
-          <Button size="sm" variant="text" className="flex items-center gap-2">
-            Learn More
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={2}
-              stroke="currentColor"
-              className="h-4 w-4"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
-              />
-            </svg>
-          </Button>
+
+
+
+
+<div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+    <a href="#">
+        <img class="rounded-t-lg" src="/docs/images/blog/image-1.jpg" alt="" />
+    </a>
+    <div className="p-5">
+        <a href="#">
+            <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Noteworthy technology acquisitions 2021</h5>
         </a>
-      </CardFooter>
-    </Card>
-    <Card className="mt-6 w-96">
-      <CardBody>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          fill="currentColor"
-          className="mb-4 h-12 w-12 text-gray-900"
-        >
-          <path
-            fillRule="evenodd"
-            d="M9.315 7.584C12.195 3.883 16.695 1.5 21.75 1.5a.75.75 0 01.75.75c0 5.056-2.383 9.555-6.084 12.436A6.75 6.75 0 019.75 22.5a.75.75 0 01-.75-.75v-4.131A15.838 15.838 0 016.382 15H2.25a.75.75 0 01-.75-.75 6.75 6.75 0 017.815-6.666zM15 6.75a2.25 2.25 0 100 4.5 2.25 2.25 0 000-4.5z"
-            clipRule="evenodd"
-          />
-          <path d="M5.26 17.242a.75.75 0 10-.897-1.203 5.243 5.243 0 00-2.05 5.022.75.75 0 00.625.627 5.243 5.243 0 005.022-2.051.75.75 0 10-1.202-.897 3.744 3.744 0 01-3.008 1.51c0-1.23.592-2.323 1.51-3.008z" />
-        </svg>
-        <Typography variant="h5" color="blue-gray" className="mb-2">
-          UI/UX Review Check
-        </Typography>
-        <Typography>
-          Because it&apos;s about motivating the doers. Because I&apos;m here to
-          follow my dreams and inspire others.
-        </Typography>
-      </CardBody>
-      <CardFooter className="pt-0">
-        <a href="#" className="inline-block">
-          <Button size="sm" variant="text" className="flex items-center gap-2">
-            Learn More
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={2}
-              stroke="currentColor"
-              className="h-4 w-4"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
-              />
+        <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.</p>
+        <button  className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+        onClick={onTakePicture}>
+            
+            Take a Picture
+             <svg className="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
             </svg>
-          </Button>
-        </a>
-      </CardFooter>
-    </Card>
-    <Card className="mt-6 w-96">
-      <CardBody>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          fill="currentColor"
-          className="mb-4 h-12 w-12 text-gray-900"
-        >
-          <path
-            fillRule="evenodd"
-            d="M9.315 7.584C12.195 3.883 16.695 1.5 21.75 1.5a.75.75 0 01.75.75c0 5.056-2.383 9.555-6.084 12.436A6.75 6.75 0 019.75 22.5a.75.75 0 01-.75-.75v-4.131A15.838 15.838 0 016.382 15H2.25a.75.75 0 01-.75-.75 6.75 6.75 0 017.815-6.666zM15 6.75a2.25 2.25 0 100 4.5 2.25 2.25 0 000-4.5z"
-            clipRule="evenodd"
-          />
-          <path d="M5.26 17.242a.75.75 0 10-.897-1.203 5.243 5.243 0 00-2.05 5.022.75.75 0 00.625.627 5.243 5.243 0 005.022-2.051.75.75 0 10-1.202-.897 3.744 3.744 0 01-3.008 1.51c0-1.23.592-2.323 1.51-3.008z" />
-        </svg>
-        <Typography variant="h5" color="blue-gray" className="mb-2">
-          UI/UX Review Check
-        </Typography>
-        <Typography>
-          Because it&apos;s about motivating the doers. Because I&apos;m here to
-          follow my dreams and inspire others.
-        </Typography>
-      </CardBody>
-      <CardFooter className="pt-0">
-        <a href="#" className="inline-block">
-          <Button size="sm" variant="text" className="flex items-center gap-2">
-            Learn More
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={2}
-              stroke="currentColor"
-              className="h-4 w-4"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
-              />
-            </svg>
-          </Button>
-        </a>
-      </CardFooter>
-    </Card>
+        </button>
+    </div>
+</div>
 
-        </div>
+ 
+      </div>
 
-        </div>
-        
+    </>
+
     )
 }
+
+
 
 export default Home

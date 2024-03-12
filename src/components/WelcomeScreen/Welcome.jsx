@@ -1,8 +1,9 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom';
 
 function Welcome() {
 
- 
+  const navigate=useNavigate();
 
   const imageStyle = {
     height: 100,
@@ -15,7 +16,7 @@ function Welcome() {
   const textStyle = {
     fontSize: 65,
     fontWeight: 700,
-    color: 'white',
+    color: '#420103',
     textAlign: 'center',  
   };
 
@@ -24,7 +25,9 @@ function Welcome() {
     margin: '30px',
     background: '#fff',
     borderRadius: '20px',
+    width: '40%',
     cursor: 'pointer',
+
   };
 
   const buttonGuestStyle = {
@@ -33,14 +36,17 @@ function Welcome() {
     background: '#fff',
     borderRadius: '20px',
     cursor: 'pointer',
+   
   };
 
-  const navigation = {
-    navigate: (route) => {
-      // Handle navigation here
-      console.log(`Navigating to ${route}`);
-    },
-  };
+ function goTologin()
+ {
+   navigate('/login');
+ }
+ function gotToRegister()
+ {
+   navigate('/register');
+ }
 
   const onContinueAsGuest = () => {
     // Handle continue as guest action
@@ -48,6 +54,7 @@ function Welcome() {
   };
   return (
     <>
+  
 
     <div className="h-screen w-screen bg-black flex">
       {/* Left Side of Screen*/}
@@ -55,11 +62,11 @@ function Welcome() {
         
       <img
             src="./assets/welcome_screen_image.png"
-            class="transform rotate-90 ..."
+            className="transform rotate-90 ..."
             style={{
               height: 120,
               width: 120,
-              borderRadius: 20,
+              borderRadius: 20, 
               position: "absolute",
               top: 150, 
               left: 480,
@@ -68,7 +75,7 @@ function Welcome() {
  
          <img
             src="./assets/welcome_screen_image.png"
-            class="transform rotate-45 ..."
+            className="transform rotate-45 ..."
             style={{
               height: 150,
               width: 150,
@@ -86,7 +93,7 @@ function Welcome() {
 
           <img
            src="./assets/welcome_screen_image.png"
-           class="transform rotate-12 ..."
+           className="transform rotate-12 ..."
             style={{
               height: 200,
               width: 200,
@@ -103,13 +110,13 @@ function Welcome() {
           />  
             <img
            src="./assets/welcome_screen_image.png"
-           class="transform rotate-0 ..."
+           className="transform rotate-0 ..."
             style={{
               height: 250,
               width: 250,
               borderRadius: 20,
               position: "absolute",
-              top: 600,
+              top: 550,
               left: 400,
               transform: [
                 { translateX: 50 },
@@ -124,7 +131,7 @@ function Welcome() {
 
 
         {/* Right Side of Screen*/}
-      <div className='h-full w-6/12' style={{ background: 'linear-gradient(to right, #39B68D, #007260)' }}>
+      <div className='h-full w-6/12' style={{ background:   '#39B68D' }}>
       <div style={{
         paddingHorizontal: 22,
         position: "relative",
@@ -136,19 +143,19 @@ function Welcome() {
 
         <div style={textStyle}>Let's Get Started</div>
 
-        <div style={{ marginTop: 10, marginBottom: 40,alignItems: 'center',justifyContent: 'center', textAlign: 'center',  }}>
+        <div style={{marginTop: 10, marginBottom: 40,alignItems: 'center',justifyContent: 'center', textAlign: 'center'}}>
           <div style={{ fontSize: 30, color: 'white', marginVertical: 4 }}>
-            <span style={{  fontWeight: 1000 }}>Detect, Prevent, and Treat</span> tomato crop diseases.
+            <span style={{  color:'#420103' , fontWeight: 1000 }}>Detect, Prevent, and Treat Tomato Crop Diseases.</span> 
           </div>
-          <div style={{ fontSize: 25, color: 'white' }}>Remember, a healthy crop is a happy crop!</div>
+          <div style={{ fontSize: 25, color: '#420103' }}>Remember, a healthy crop is a happy crop!</div>
         </div>
 
         <div style={{ fontSize: 20, alignItems: 'center', justifyContent: 'center', textAlign: 'center',display: 'flex', flexDirection: 'row' }}>
         
-          <button onClick={() => navigation.navigate('Login')} style={buttonStyle}>
+          <button onClick={goTologin} style={buttonStyle}>
             <span>Login</span>
           </button>
-          <button onClick={() => navigation.navigate('Register')} style={buttonStyle}>
+          <button onClick={gotToRegister} style={buttonStyle}>
             <span>Register</span>
           </button>
         </div>
