@@ -1,0 +1,124 @@
+#search-bar {
+  padding: 10px;
+  border: 2px solid #1a7c6c;
+  border-radius: 5px;
+  outline: none;
+  width: 200px;
+  margin: 0 auto;
+  display: block;
+}
+
+#disease-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.card {
+  margin: 10px;
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 10px 20px -10px rgba(0,0,0,.25);
+  overflow: hidden;
+  width: calc(33% - 20px); /* Adjust width for smaller cards */
+  transition: transform .5s;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+.card h2 {
+  background: #1a7c6c;
+  color: white;
+  padding: 20px;
+  margin: 0;
+  text-align: center;
+}
+
+.card p {
+  padding: 20px;
+  color: #333;
+  line-height: 1.5;
+  text-align: justify;
+}
+
+@media (max-width: 1000px) {
+  .card {
+      width: calc(50% - 20px);
+  }
+}
+
+@media (max-width: 600px) {
+  .card {
+      width: 100%;
+  }
+}
+
+.card-content {
+  height: 150px; /* Fixed height for the content */
+  overflow: hidden;
+  position: relative;
+}
+
+.read-more {
+  display: none; /* Hide the read more by default */
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding: 10px;
+  background: #1a7c6c;
+  color: white;
+  cursor: pointer;
+  border-bottom-right-radius: 20px; /* Match the card's border radius */
+  transition: background-color 0.3s; /* Smooth background color transition */
+}
+
+.card:hover .read-more {
+  display: block; /* Only show read more when the card is hovered */
+}
+
+.card.expanded .card-content {
+  height: auto; 
+}
+
+.card.expanded .read-more {
+  background: #1a7c6c;
+}
+/* Existing styles... */
+
+.card-content {
+  max-height: 150px; /* Set a max-height for collapsed state */
+  overflow: hidden;
+  position: relative;
+  transition: max-height 0.3s ease; /* Smooth transition for max-height */
+}
+
+.read-more {
+  background: #1a7c6c;
+  color: white;
+  padding: 10px;
+  text-align: center;
+  display: block; /* Make the button a block to occupy its own line */
+  width: 100%; /* Full width button */
+  cursor: pointer;
+  border: none;
+  outline: none;
+  transition: background-color 0.3s; /* Smooth background color transition */
+}
+
+.read-more:hover {
+  background: #1a7c6c; /* Darker background on hover */
+}
+
+/* Add styles for expanded state */
+.card.expanded .card-content {
+  max-height: none; /* Remove max-height when expanded */
+}
+
+/* Adjustments for mobile responsiveness */
+@media (max-width: 600px) {
+  .card-content {
+    max-height: none; /* You might want to always expand on mobile, or adjust as needed */
+  }
+}

@@ -4,10 +4,12 @@ import Welcome from "./components/WelcomeScreen/Welcome";
 import AboutUs from "./components/AboutUs";
 import Header from "./components/header";
 import Home from "./components/home";
+import InformationHub from "./components/InformationHub";
 
 import { AuthProvider } from "./contexts/authContext";
 import { useRoutes } from "react-router-dom";
-import CameraComponent from "./components/IntegrateModel";
+import { useState } from 'react';
+import YourComponent from "./components/IntegrateModel";
 
 function App() {
   const routesArray = [
@@ -33,11 +35,15 @@ function App() {
     },
     {
       path: "/model",
-      element: <CameraComponent />,
+      element: <YourComponent />,
     },
     {
       path: "/AboutUs",
       element: <AboutUs />,
+    },
+    {
+      path: "/InformationHub",
+      element: <InformationHub />,
     },
   ];
   let routesElement = useRoutes(routesArray);
@@ -45,7 +51,7 @@ function App() {
     <AuthProvider>
       <Header />
       <div className="w-full h-screen flex flex-col">{routesElement}</div>
-      <AboutUs/>
+      {/* <AboutUs/> */}
     </AuthProvider>
   );
 }

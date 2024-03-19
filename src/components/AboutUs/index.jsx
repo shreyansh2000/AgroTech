@@ -23,7 +23,7 @@ function AboutUs() {
 
                   <div class="team-item">
                   
-                      <img src="https://demo.epic-webdesign.com/tf-pacifico/v1/images/team3a.jpg" class="team-img" alt="pic" />
+                      <img src="./assets/image.png" class="team-img" alt="pic" />
                      
                       <h3>SANJAY PATEL</h3>
                       
@@ -52,7 +52,7 @@ function AboutUs() {
 
                   <div className="team-item">
                   
-                      <img src="https://demo.epic-webdesign.com/tf-pacifico/v1/images/team3a.jpg" class="team-img" alt="pic" />
+                      <img src="./assets/image.png"  class="team-img" alt="pic" />
                      
                       <h3>SHREYANSH DALWADI</h3>
                       
@@ -60,7 +60,7 @@ function AboutUs() {
 
                       <p>Elisa first fell in love with digital marketing at the university. He loves to learn, and looks forward to being part of this new exciting industry for many years.</p>
                   
-                      <ul class="team-icon">
+                      <ul className="team-icon">
                       
                           <li><a href="#" class="twitter"><i class="fa fa-twitter"></i></a></li>
                           
@@ -81,7 +81,7 @@ function AboutUs() {
 
                   <div className="team-item">
                   
-                      <img src="https://demo.epic-webdesign.com/tf-pacifico/v1/images/team3a.jpg" class="team-img" alt="pic" />
+                      <img src="./assets/image.png"  class="team-img" alt="pic" />
                      
                       <h3>ABHISHEK</h3>
                       
@@ -110,7 +110,7 @@ function AboutUs() {
 
                   <div className="team-item">
                   
-                      <img src="https://demo.epic-webdesign.com/tf-pacifico/v1/images/team3a.jpg" class="team-img" alt="pic" />
+                      <img src="./assets/image.png"  class="team-img" alt="pic" />
                      
                       <h3>NRUP PATEL</h3>
                       

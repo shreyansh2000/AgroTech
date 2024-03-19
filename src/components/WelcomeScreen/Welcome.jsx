@@ -50,7 +50,7 @@ function Welcome() {
 
   const onContinueAsGuest = () => {
     // Handle continue as guest action
-    console.log('Continue as Guest clicked');
+    navigate('/home');
   };
   return (
     <>

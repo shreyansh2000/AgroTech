@@ -24,7 +24,19 @@ const Register = () => {
         e.preventDefault()
         if(!isRegistering) {
             setIsRegistering(true)
+            const user = await fetch('https://tomatocrop-66f6d-default-rtdb.firebaseio.com/users.json', 
+            {
+             method: "POST",
+             headers:{
+                 'Content-Type': 'application/json',
+             },
+             body: JSON.stringify({
+                 username
+             })
+         })
+         
             await doCreateUserWithEmailAndPassword(email, password)
+       
         }
     }
 
