@@ -293,3 +293,12 @@ li {
     font-size: 3.8rem;
   }
 }
+
+
+.main-nav{
+  transition: top 0.3s ease-in-out;
+}
+
+.nav-hidden{
+  top: -100%;
+}

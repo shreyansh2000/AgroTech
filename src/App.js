@@ -5,7 +5,7 @@ import AboutUs from "./components/AboutUs";
 import Header from "./components/header";
 import Home from "./components/home";
 import InformationHub from "./components/InformationHub";
-
+import Modal from "./components/Modal/Modal";
 import { AuthProvider } from "./contexts/authContext";
 import { useRoutes } from "react-router-dom";
 import { useState } from 'react';
@@ -45,13 +45,16 @@ function App() {
       path: "/InformationHub",
       element: <InformationHub />,
     },
+    {
+      path: "/Modal",
+      element: <Modal />,
+    },
   ];
   let routesElement = useRoutes(routesArray);
   return (
     <AuthProvider>
       <Header />
       <div className="w-full h-screen flex flex-col">{routesElement}</div>
-      {/* <AboutUs/> */}
     </AuthProvider>
   );
 }

@@ -5,6 +5,9 @@ function YourComponent() {
   const [prediction, setPrediction] = useState(null);
   const [selectedFile, setSelectedFile] = useState(null);
   const [imagePreview, setImagePreview] = useState(null); // State for image preview
+  const [showModal,setShowModal]=useState(false);
+
+
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
@@ -52,6 +55,7 @@ function YourComponent() {
         {/* Submit button */}
         <button type="submit" style={{fontSize:'20px', marginTop: '10px'}}>Submit</button>
       </form>
+   
 
     
       

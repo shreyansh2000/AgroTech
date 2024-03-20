@@ -1,97 +1,80 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../header/header.css";
-import { Link, useNavigate } from 'react-router-dom'
-import { useAuth } from '../../contexts/authContext'
-import { doSignOut } from '../../firebase/auth'
-import {
-    FaFacebookSquare,
-    FaInstagramSquare,
-    FaYoutubeSquare,
-  } from "react-icons/fa";
-  import { GiHamburgerMenu } from "react-icons/gi";
 import { NavLink } from "react-router-dom";
+import { FaFacebookSquare, FaInstagramSquare, FaYoutubeSquare } from "react-icons/fa";
+import { GiHamburgerMenu } from "react-icons/gi";
 
 const Header = () => {
     const [showMediaIcons, setShowMediaIcons] = useState(false);
-    const navigate = useNavigate()
-    const { userLoggedIn } = useAuth()
+    const [lastScrollY, setLastScrollY] = useState(0);
+    const [navBarVisible, setNavBarVisible] = useState(true);
+
+    const controlNavbar = () => {
+        if (window.scrollY > lastScrollY) {
+            // if scroll down hide the navbar
+            setNavBarVisible(false);
+        } else {
+            // if scroll up show the navbar
+            setNavBarVisible(true);
+        }
+        // remember current page location to use in the next move
+        setLastScrollY(window.scrollY);
+    };
+
+    useEffect(() => {
+        window.addEventListener('scroll', controlNavbar);
+
+        // Cleanup function to remove the event listener
+        return () => {
+            window.removeEventListener('scroll', controlNavbar);
+        };
+    }, [lastScrollY]);
+
     return (  
-          <>
-        <nav className="main-nav">
-          {/* 1st logo part  */}
-          <div className="logo">
-            <h2>
-              <span>T</span>omato
-            </h2>
-          </div>
+        <>
+            <nav className={`main-nav ${!navBarVisible ? 'nav-hidden' : ''}`}>
+                <div className="logo">
+                    <h2>
+                        <span>T</span>omato
+                    </h2>
+                </div>
   
-          {/* 2nd menu part  */}
-          <div
-            className={
-
-
-              showMediaIcons ? "menu-link mobile-menu-link" : "menu-link"
-
-            }
-            >
-            <ul>
-              <li>
-                <NavLink to="/">Home</NavLink>
-              </li>
-              <li>
-                <NavLink to="/about">about</NavLink>
-              </li>
-              <li>
-                <NavLink to="/service">services</NavLink>
-              </li>
-              <li>
-                <NavLink to="/contact">contact</NavLink>
-              </li>
-            </ul>
-          </div>
+                <div className={showMediaIcons ? "menu-link mobile-menu-link" : "menu-link"}>
+                    <ul>
+                        <li><NavLink to="/">Home</NavLink></li>
+                        <li><NavLink to="/AboutUs">About</NavLink></li>
+                        <li><NavLink to="/service">Services</NavLink></li>
+                        <li><NavLink to="/contact">Contact</NavLink></li>
+                    </ul>
+                </div>
   
-          {/* 3rd social media links */}
-          <div className="social-media">
-            <ul className="social-media-desktop">
-              <li>
-                <a
-                  href="https://www.youtube.com/channel/UCwfaAHy4zQUb2APNOGXUCCA"
-                  target="_thapa">
-                  <FaFacebookSquare className="facebook" />
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://www.instagram.com/thapatechnical/"
-                  target="_thapa">
-                  <FaInstagramSquare className="instagram" />
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://www.youtube.com/channel/UCwfaAHy4zQUb2APNOGXUCCA"
-                  target="_thapa">
-                  <FaYoutubeSquare className="youtube" />
-                </a>
-              </li>
-            </ul>
-  
-            {/* hamburget menu start  */}
-            <div className="hamburger-menu">
-              <a href="#" onClick={() => setShowMediaIcons(!showMediaIcons)}>
-                <GiHamburgerMenu />
-              </a>
-            </div>
-          </div>
-        </nav> 
-           
-
-
+                <div className="social-media">
+                    <ul className="social-media-desktop">
+                        <li>
+                            <a href="https://www.facebook.com" target="_thapa">
+                                <FaFacebookSquare className="facebook" />
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.instagram.com" target="_thapa">
+                                <FaInstagramSquare className="instagram" />
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.youtube.com" target="_thapa">
+                                <FaYoutubeSquare className="youtube" />
+                            </a>
+                        </li>
+                    </ul>
+                    <div className="hamburger-menu">
+                        <a href="#" onClick={() => setShowMediaIcons(!showMediaIcons)}>
+                            <GiHamburgerMenu />
+                        </a>
+                    </div>
+                </div>
+            </nav>
         </>
-    )
-
+    );
 }
 
-
-
-export default Header
+export default Header;
