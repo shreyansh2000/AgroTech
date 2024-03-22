@@ -43,35 +43,11 @@ const Header = () => {
                     <ul>
                         <li><NavLink to="/">Home</NavLink></li>
                         <li><NavLink to="/AboutUs">About</NavLink></li>
-                        <li><NavLink to="/service">Services</NavLink></li>
-                        <li><NavLink to="/contact">Contact</NavLink></li>
+                        <li><NavLink to="/InformationHub">InformationHub</NavLink></li>
                     </ul>
                 </div>
   
-                <div className="social-media">
-                    <ul className="social-media-desktop">
-                        <li>
-                            <a href="https://www.facebook.com" target="_thapa">
-                                <FaFacebookSquare className="facebook" />
-                            </a>
-                        </li>
-                        <li>
-                            <a href="https://www.instagram.com" target="_thapa">
-                                <FaInstagramSquare className="instagram" />
-                            </a>
-                        </li>
-                        <li>
-                            <a href="https://www.youtube.com" target="_thapa">
-                                <FaYoutubeSquare className="youtube" />
-                            </a>
-                        </li>
-                    </ul>
-                    <div className="hamburger-menu">
-                        <a href="#" onClick={() => setShowMediaIcons(!showMediaIcons)}>
-                            <GiHamburgerMenu />
-                        </a>
-                    </div>
-                </div>
+                
             </nav>
         </>
     );
