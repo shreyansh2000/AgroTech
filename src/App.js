@@ -9,6 +9,7 @@ import { AuthProvider } from "./contexts/authContext";
 import { useRoutes } from "react-router-dom";
 import { useState } from 'react';
 import YourComponent from "./components/IntegrateModel";
+import HistoryPage from "./components/History";
 
 function App() {
   const routesArray = [
@@ -43,6 +44,10 @@ function App() {
     {
       path: "/InformationHub",
       element: <InformationHub />,
+    },
+    {
+      path: "/history",
+      element: <HistoryPage />,
     },
   ];
   let routesElement = useRoutes(routesArray);

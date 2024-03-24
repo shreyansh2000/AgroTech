@@ -1,18 +1,3 @@
-
-// const MyModal=({closeModal})=>{
-//     return(
-//         <>
-//         <div className="modal-wrapper">   </div>
-//         <div>
-//         <button onClick={closeModal}>Close</button>
-//         </div>
-//         </>
-//     )
-// }
-
-// export default MyModal
-
-
 import React from "react";
 
 export default function CameraModal() {

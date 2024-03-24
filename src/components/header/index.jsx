@@ -35,7 +35,9 @@ const Header = () => {
             <nav className={`main-nav ${!navBarVisible ? 'nav-hidden' : ''}`}>
                 <div className="logo">
                     <h2>
-                        <span>T</span>omato
+
+                        <span>A<NavLink to="/">groTech</NavLink></span>
+                        
                     </h2>
                 </div>
   
