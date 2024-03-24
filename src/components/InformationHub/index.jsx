@@ -22,7 +22,6 @@ function InformationHub() {
 
   const handleSearch = (searchText) => {
     if (!searchText.trim()) {
-      // If the search text is empty, reset to the full list of diseases
       setDiseases(allDiseases);
       setSelectedDisease(allDiseases[0]);
     } else {
