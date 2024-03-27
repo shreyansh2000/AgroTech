@@ -33,11 +33,11 @@ const Home = () => {
       <div className="flex items-center justify-center h-screen">
         <animated.div
           className="grid mb-8 border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 md:mb-12 md:grid-cols-2 lg:grid-cols-2 md:grid-rows-2 bg-white dark:bg-gray-800"
-          style={{ borderColor: '#39B68D', ...fadeIn }}>
+          style={{ borderColor: '#39B68D', ...fadeIn }} >
           {/* Logo */}
           <div
             className="max-w-full flex justify-center items-center bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 md:col-span-3"
-            style={{ borderColor: '#39B68D' }}>
+           >
             <div className="max-w-4xl items-center bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
               <div className="flex justify-center items-center h-full">
                 <a>
@@ -80,7 +80,7 @@ const Home = () => {
           {/* Upload image */}
           <animated.div
             className="flex flex-col items-center justify-center p-8 text-center bg-white border-b border-gray-200 rounded-t-lg md:rounded-t-none md:rounded-ss-lg md:border-e dark:bg-gray-800 dark:border-gray-700"
-            style={{ borderColor: '#39B68D', ...fadeIn }}>
+           >
             <div className="p-10">
               <a>
                 <h5 className="mb-2 text-4xl font-bold tracking-tight text-gray-900 dark:text-white">
@@ -98,7 +98,7 @@ const Home = () => {
           {/* Take an image */}
           <animated.div
             className="flex flex-col items-center justify-center p-8 text-center bg-white border-b border-gray-200 rounded-t-lg md:rounded-t-none md:rounded-ss-lg md:border-e dark:bg-gray-800 dark:border-gray-700"
-            style={{ borderColor: '#39B68D', ...fadeIn }}>
+           >
             <div className="p-10">
               <a>
                 <h5 className="mb-2 text-4xl font-bold tracking-tight text-gray-900 dark:text-white">
