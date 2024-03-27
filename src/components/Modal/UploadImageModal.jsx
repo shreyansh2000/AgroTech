@@ -78,7 +78,7 @@ export default function UploadImageModal() {
   return (
     <>
       <button
-        className="bg-green-500 text-white active:bg-green-500 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+        className="camera-button"
         type="button"
         onClick={() => setShowModal(true)}
       >
@@ -89,7 +89,7 @@ export default function UploadImageModal() {
           <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
             <div className="relative w-auto my-6 mx-auto max-w-6xl">
               {/*content*/}
-              <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-[800px] h-[500px] bg-white outline-none focus:outline-none">
+              <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-[800px] h-[550px] bg-white outline-none focus:outline-none">
                 {/*header*/}
                 <div className="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">
                   <h3 className="text-3xl font-semibold">
@@ -109,8 +109,26 @@ export default function UploadImageModal() {
                 <div className="relative p-6 flex-auto flex items-center justify-center">
                   <form onSubmit={handleSubmit} className="flex flex-col items-center" style={{ width: '100%' }}>
                     {/* Input for selecting image */}
-                    <input type="file" accept="image/*" className="text-lg mt-8" onChange={handleFileChange} style={{ width: '100%' }} />
-  
+                    {/* <input type="file" accept="image/*" className="text-xl mt-8" onChange={handleFileChange} style={{ width: '100%',  padding: '10px', border: '1px solid grey', borderRadius: '5px', marginBottom: '10px' }} />
+   */}
+   <div style={{ textAlign: 'center' }}>
+  <input
+    type="file"
+    accept="image/*"
+    className="text-xl mt-8"
+    onChange={handleFileChange}
+    style={{
+      display: 'inline-block',
+      width: '100%',
+      padding: '10px',
+      border: '1px solid grey',
+      borderRadius: '5px',
+      marginBottom: '10px',
+      textAlign: 'center'
+    }}
+  />
+</div>
+
                     {/* Image preview */}
                     <div className="flex justify-between" style={{ width: '100%' }}>
                       <Box
