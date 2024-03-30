@@ -1,0 +1,39 @@
+/* Your existing CSS styles */
+/* You can add more styles or modify existing ones */
+
+/* Media Queries */
+@media screen and (max-width: 768px) {
+    .content-container {
+      padding: 0 20px; /* Adjust as needed for smaller screens */
+    }
+  }
+  
+  @media screen and (max-width: 480px) {
+    .content-container {
+      padding: 0 10px; /* Adjust as needed for smaller screens */
+    }
+  
+    .text-style {
+      font-size: 50px; /* Adjust font size for smaller screens */
+    }
+  
+    .description {
+      font-size: 18px; /* Adjust font size for smaller screens */
+    }
+  
+    .button-container {
+      flex-direction: column; /* Arrange buttons vertically on smaller screens */
+    }
+  
+    .button-style {
+      width: 100%; /* Make buttons full width on smaller screens */
+      margin-bottom: 10px; /* Add space between buttons */
+    }
+  
+    .button-guest-style {
+      width: 100%; /* Make guest button full width on smaller screens */
+      margin-bottom: 20px; /* Add space below the guest button */
+    }
+  }
+  
+  

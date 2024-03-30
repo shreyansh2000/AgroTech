@@ -1,9 +1,16 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
+import { animated, useSpring } from 'react-spring';
 
 function Welcome() {
 
   const navigate=useNavigate();
+  const fadeIn = useSpring({
+    from: { opacity: 0 },
+    to: { opacity: 1 },
+    config: { duration: 1000 },
+  });
+
 
   const imageStyle = {
     height: 100,
@@ -55,10 +62,12 @@ function Welcome() {
   return (
     <>
   
-
-    <div className="h-screen w-screen bg-black flex">
+  <div>
+    <animated.div className="h-screen w-screen bg-black flex" style={{ ...fadeIn }}>
       {/* Left Side of Screen*/}
+      
       <div className='h-full w-6/12 bg-[#39B68D]'>
+  
         
       <img
             src="./assets/welcome_screen_image.png"
@@ -168,6 +177,7 @@ function Welcome() {
 
 
 
+    </animated.div>
     </div>
 
     </>

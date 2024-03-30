@@ -6,6 +6,7 @@ import { auth } from "../../firebase/firebase";
 import Box from '@mui/material/Box';
 import Alert from '@mui/material/Alert';
 import Stack from '@mui/material/Stack';
+import CircularProgress from '@mui/material/CircularProgress';
 
 
 
@@ -30,6 +31,34 @@ export default function UploadImageModal() {
       setImagePreview(null);
     }
   };
+  function getSeverityAndMessage(prediction) {
+    let severity = 'success';
+    let message = 'Green: Leaf is healthy';
+  
+    if (prediction) {
+      if (
+        prediction.includes('Bacterial Spot') ||
+        prediction.includes('Early Blight') ||
+        prediction.includes('Late Blight') ||
+        prediction.includes('Target Spot') ||
+        prediction.includes('Yellow Leaf Curl Virus')
+      ) {
+        severity = 'error';
+        message = 'Red: Leaf is affected by disease';
+      } else if (
+        prediction.includes('Leaf Mold') ||
+        prediction.includes('Septoria Leaf Spot') ||
+        prediction.includes('Mosaic Virus') ||
+        prediction.includes('Spider Mites')
+      ) {
+        severity = 'warning';
+        message = 'Yellow: Leaf may have some issues';
+      }
+    }
+  
+    return { severity, message };
+  }
+  
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -78,7 +107,7 @@ export default function UploadImageModal() {
   return (
     <>
       <button
-        className="camera-button"
+        className="bg-green-500 text-white font-bold uppercase py-3 px-6 rounded shadow hover:shadow-lg"
         type="button"
         onClick={() => setShowModal(true)}
       >
@@ -111,23 +140,23 @@ export default function UploadImageModal() {
                     {/* Input for selecting image */}
                     {/* <input type="file" accept="image/*" className="text-xl mt-8" onChange={handleFileChange} style={{ width: '100%',  padding: '10px', border: '1px solid grey', borderRadius: '5px', marginBottom: '10px' }} />
    */}
-   <div style={{ textAlign: 'center' }}>
-  <input
-    type="file"
-    accept="image/*"
-    className="text-xl mt-8"
-    onChange={handleFileChange}
-    style={{
-      display: 'inline-block',
-      width: '100%',
-      padding: '10px',
-      border: '1px solid grey',
-      borderRadius: '5px',
-      marginBottom: '10px',
-      textAlign: 'center'
-    }}
-  />
-</div>
+                   <div style={{ textAlign: 'center' }}>
+                <input
+              type="file"
+              accept="image/*"
+              className="text-xl mt-8"
+               onChange={handleFileChange}
+               style={{
+                display: 'inline-block',
+                width: '100%',
+              padding: '10px',
+               border: '1px solid grey',
+               borderRadius: '5px',
+             marginBottom: '10px',
+             textAlign: 'center'
+               }}  
+              />
+                      </div>
 
                     {/* Image preview */}
                     <div className="flex justify-between" style={{ width: '100%' }}>
@@ -141,6 +170,7 @@ export default function UploadImageModal() {
                         gap={4}
                         p={2}
                         sx={{ border: '2px solid grey' }}
+                        
                       >
                         {imagePreview ? (
                           <img
@@ -148,6 +178,7 @@ export default function UploadImageModal() {
                             alt="Preview"
                             className="max-w-full max-h-300"
                             style={{ maxWidth: '100%', maxHeight: '100%' }}
+                            
                           />
                         ) : (
                           <button onClick={()=>console.log("clicked")}>Upload Image</button>
@@ -155,22 +186,29 @@ export default function UploadImageModal() {
                       </Box>
                        {/* Display prediction */}
                    
-
-                      <Box
-                        height={220}
-                        width={300}
-                        my={4}
-                        display="flex"
-                        alignItems="center"
-                        justifyContent="center" // Center the content horizontally
-                        gap={4}
-                        p={2}
-                        sx={{ border: '2px solid grey' }}
-                      >
-                         {prediction && (
-                       <div className="text-lg mt-5">Prediction: {prediction}</div>
-                       )}
-                      </Box>
+                       <Box
+        height={220}
+        width={300}
+        my={4}
+        display="flex"
+        alignItems="center"
+        justifyContent="center" // Center the content horizontally
+        gap={4}
+        p={2}
+        sx={{ border: '2px solid grey' }}
+      >
+        {/* Conditionally render loading indicator */}
+        {loading ? (
+          <CircularProgress /> // Show loading indicator when loading is true
+        ) : (
+          <>
+            {/* Show prediction when available */}
+            {prediction && (
+              <div className="text-lg mt-5">Prediction: {prediction}</div>
+            )}
+          </>
+        )}
+      </Box>
                       
                     </div>
                   </form>
@@ -179,57 +217,34 @@ export default function UploadImageModal() {
                 {/*footer*/}
                 <div className="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
                 {imagePreview && prediction && (
-  <Stack sx={{ width: '100%' }} spacing={2}>
-    {prediction && (
-      <Alert
-        style={{ width: '100%', fontSize: '16px', padding: '10px' }}
-        severity={
-          prediction.includes('Bacterial Spot') ||
-          prediction.includes('Early Blight') ||
-          prediction.includes('Late Blight') ||
-          prediction.includes('Target Spot') ||
-          prediction.includes('Yellow Leaf Curl Virus')
-            ? 'error'
-            : prediction.includes('Leaf Mold') ||
-              prediction.includes('Septoria Leaf Spot') ||
-              prediction.includes('Mosaic Virus') ||
-              prediction.includes('Spider Mites')
-            ? 'warning'
-            : 'success'
-        }
-      >
-        {prediction.includes('Bacterial Spot') ||
-        prediction.includes('Early Blight') ||
-        prediction.includes('Late Blight') ||
-        prediction.includes('Target Spot') ||
-        prediction.includes('Yellow Leaf Curl Virus')
-          ? 'Red: Leaf is affected by disease'
-          : prediction.includes('Leaf Mold') ||
-            prediction.includes('Septoria Leaf Spot') ||
-            prediction.includes('Mosaic Virus') ||
-            prediction.includes('Spider Mites')
-          ? 'Yellow: Leaf may have some issues'
-          : 'Green: Leaf is healthy'}
-      </Alert>
-    )}
-  </Stack>
-)}
+                <Stack sx={{ width: '100%' }} spacing={2}>
+                  {prediction && (
+                 <Alert
+                 style={{ width: '100%', fontSize: '16px', padding: '10px' }}
+                  severity={getSeverityAndMessage(prediction).severity}
+                 >
+                  {getSeverityAndMessage(prediction).message}
+                 </Alert>    
+              )}
+              </Stack>
+                    )}
 
-                  <button
-                    className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                    type="button"
-                    onClick={() => setShowModal(false) || handleCloseModal()}
-                  >
-                    Close
-                  </button>
-                  <button
-                    className="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                    type="button"
-                    onClick={handleSubmit} // Call handleSubmit for the Predict button
-                  >
-                    Predict
-                  </button>
-                </div>
+      <button
+    className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+    type="button"
+    onClick={() => setShowModal(false) || handleCloseModal()}
+  >
+    Close
+  </button>
+  <button
+    className="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+    type="button"
+    onClick={handleSubmit} // Call handleSubmit for the Predict button
+  >
+    Predict
+  </button>
+</div>
+
               </div>
             </div>
           </div>
