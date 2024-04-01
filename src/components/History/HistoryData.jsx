@@ -3,7 +3,7 @@ import { getDocs, collection, doc } from 'firebase/firestore';
 import { db, auth } from '../../firebase/firebase';
 import { useAuth } from '../../contexts/authContext';
 import { DataGrid } from '@mui/x-data-grid';
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import TreatmentModal from './TreatmentModal'; // Import the TreatmentModal component
 
 function HistoryData() {
@@ -12,10 +12,28 @@ function HistoryData() {
   const [showTreatment, setShowTreatment] = useState(false);
   const [selectedTreatment, setSelectedTreatment] = useState("");
 
+
+  
+
   const columns = [
     { field: 'id', headerName: 'ID', width: 150 },
     { field: 'imageUri', headerName: 'Image', width: 150, renderCell: (params) => <img src={params.value} alt="image" /> },
-    { field: 'prediction', headerName: 'Prediction', width: 150 },
+    {
+      field: 'prediction', 
+      headerName: 'Prediction', 
+      width: 150,
+      renderCell: (params) => (
+        <>
+          {params.value}
+          {/* Add a check to not display the link for 'Healthy' prediction */}
+          {params.value !== 'Healthy' && (
+            <Link to={`/informationhub?search=${encodeURIComponent(params.value)}`} className="link">
+              Info
+            </Link>
+          )}
+        </>
+      ),
+    },
     { field: 'confidence', headerName: 'Confidence', width: 150 },
     {
       field: 'predictionType',
@@ -46,12 +64,14 @@ function HistoryData() {
         </span>
       ),
     },
-    { 
-      field: 'PreventationAndTreatment', 
+    {
+      field: 'treatment', 
       headerName: 'Treatment', 
       width: 150,
       renderCell: (params) => (
-        <button onClick={() => handleViewTreatment(params.row.PreventationAndTreatment)}> View Treatment</button>
+        <Link to={`/informationhub?search=${encodeURIComponent(params.row.prediction)}`} className="link">
+          View Treatment
+        </Link>
       )
     },
   ];
@@ -60,10 +80,14 @@ function HistoryData() {
     return { ...item, id: index + 1};
   });
 
-  const handleViewTreatment = (treatment) => {
-    setSelectedTreatment(treatment);
+  const handleViewTreatment = (rowData) => {
+    setSelectedTreatment({
+      treatmentInfo: rowData.PreventationAndTreatment, // assuming this is the correct field name
+      diseaseName: rowData.prediction
+    });
     setShowTreatment(true);
   };
+  
 
   useEffect(() => {
     if (!currentUser) {
@@ -85,6 +109,8 @@ function HistoryData() {
   const handleCloseTreatment = () => {
     setShowTreatment(false);
   };
+
+  
 
   return (
     <main className='flex flex-col items-center justify-center'>
