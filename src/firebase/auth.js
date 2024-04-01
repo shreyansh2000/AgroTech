@@ -11,11 +11,24 @@ import {
 } from "firebase/auth";
 
 export const doCreateUserWithEmailAndPassword = async (email, password) => {
-  return createUserWithEmailAndPassword(auth,email, password)
+  // Create user with email and password
+  const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+  // Send email verification
+  await sendEmailVerification(userCredential.user, {
+    // You can customize the URL to redirect to after verification if needed
+    url: `${window.location.origin}/verified`, // Adjust the URL as needed
+  });
+  return userCredential;
 };
 
-export const doSignInWithEmailAndPassword = (email, password) => {
-  return signInWithEmailAndPassword(auth, email, password);
+export const doSignInWithEmailAndPassword = async (email, password) => {
+  const userCredential = await signInWithEmailAndPassword(auth, email, password);
+  const user = userCredential.user;
+  if (!userCredential.user.emailVerified) {
+    throw new Error("Please verify your email address.");
+    // Or you can resend the verification email here if you want
+  }
+  return userCredential;
 };
 
 export const doSignInWithGoogle = async () => {
