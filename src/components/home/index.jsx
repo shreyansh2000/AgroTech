@@ -7,7 +7,7 @@ import { LiaPrescriptionBottleSolid } from 'react-icons/lia';
 import { animated, useSpring } from 'react-spring';
 import CameraModal from '../Modal/CameraModal';
 import UploadImageModal from '../Modal/UploadImageModal';
-import '/Users/shreyanshdalwadi/Documents/sem4/AgroTech_Project/src/App.css'
+import '../../App.css'
 const Home = () => {
   // const { currentUser } = useAuth();
 

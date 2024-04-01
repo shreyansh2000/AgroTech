@@ -21,9 +21,17 @@ const Login = () => {
         e.preventDefault()
         if(!isSigningIn) {
             setIsSigningIn(true)
+            try{
             await doSignInWithEmailAndPassword(email, password)
+        }
+        catch{
+            setErrorMessage('Wrong email or password')
+        } finally {
+            setIsSigningIn(false)
+        }
             // doSendEmailVerification()
         }
+        
     }
 
     const handleToggle = () => {
@@ -46,7 +54,6 @@ const Login = () => {
             })
         }
     }
-
     return (
 <>
             <img
@@ -117,7 +124,8 @@ const Login = () => {
                                 {isSigningIn ? 'Signing In...' : 'Sign In'}
                             </button>
                         </form>
-                        <p className="text-center text-3xl">Don't have an account? <Link to={'/register'} className="hover:underline font-bold text-3xl">Sign up</Link></p>
+                        <p className="text-center text-3xl">Don't have an account? <Link to={'/register'} className="hover:underline font-bold text-3xl">Sign up</Link> | <Link to={'/reset'} className="hover:underline font-bold text-3xl">Forgot Password</Link></p> 
+                        
                         <div className='flex flex-row text-center w-full'>
                             <div className='border-b-2 mb-2.5 mr-2 w-full'></div><div className='text-xl font-bold w-fit'>OR</div><div className='border-b-2 mb-2.5 ml-2 w-full'></div>
                         </div>

@@ -10,6 +10,7 @@ import { useRoutes } from "react-router-dom";
 import { useState } from 'react';
 import YourComponent from "./components/IntegrateModel";
 import HistoryPage from "./components/History";
+import ResetPassword from "./components/auth/reset";
 
 function App() {
   const routesArray = [
@@ -26,16 +27,16 @@ function App() {
       element: <Register />,
     },
     {
+      path: "/reset",
+      element: <ResetPassword />,
+    },
+    {
       path: "/home",
       element: <Home />,
     },
     {
       path: "/Welcome",
       element: <Welcome />,
-    },
-    {
-      path: "/model",
-      element: <YourComponent />,
     },
     {
       path: "/AboutUs",

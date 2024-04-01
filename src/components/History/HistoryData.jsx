@@ -4,12 +4,13 @@ import { db, auth } from '../../firebase/firebase';
 import { useAuth } from '../../contexts/authContext';
 import { DataGrid } from '@mui/x-data-grid';
 import { NavLink } from "react-router-dom";
+import TreatmentModal from './TreatmentModal'; // Import the TreatmentModal component
 
 function HistoryData() {
   const { currentUser } = useAuth();
   const [history, setHistory] = useState([]);
-
-
+  const [showTreatment, setShowTreatment] = useState(false);
+  const [selectedTreatment, setSelectedTreatment] = useState("");
 
   const columns = [
     { field: 'id', headerName: 'ID', width: 150 },
@@ -22,36 +23,47 @@ function HistoryData() {
       width: 200,
       renderCell: (params) => (
         <span
-        style={{
-          backgroundColor:
-            params.row.prediction === 'Bacterial Spot' ||
-            params.row.prediction === 'Early Blight' ||
-            params.row.prediction === 'Late Blight' ||
-            params.row.prediction === 'Target Spot' ||
-            params.row.prediction === 'Yellow Leaf Curl Virus'
-              ? 'red'
-              : params.row.prediction === 'Leaf Mold' ||
-                params.row.prediction === 'Septoria Leaf Spot' ||
-                params.row.prediction === 'Mosaic Virus' ||
-                params.row.prediction === 'Spider Mites'
-              ? 'yellow'
-              : 'green',
-          color: 'white',
-          padding: '5px',
-          borderRadius: '5px'
-        }}
-      >
-        {params.value}
-      </span>
-      
+          style={{
+            backgroundColor:
+              params.row.prediction === 'Bacterial Spot' ||
+              params.row.prediction === 'Early Blight' ||
+              params.row.prediction === 'Late Blight' ||
+              params.row.prediction === 'Target Spot' ||
+              params.row.prediction === 'Yellow Leaf Curl Virus'
+                ? 'red'
+                : params.row.prediction === 'Leaf Mold' ||
+                  params.row.prediction === 'Septoria Leaf Spot' ||
+                  params.row.prediction === 'Mosaic Virus' ||
+                  params.row.prediction === 'Spider Mites'
+                ? 'yellow'
+                : 'green',
+            color: 'white',
+            padding: '5px',
+            borderRadius: '5px'
+          }}
+        >
+          {params.value}
+        </span>
       ),
     },
+    { 
+      field: 'PreventationAndTreatment', 
+      headerName: 'Treatment', 
+      width: 150,
+      renderCell: (params) => (
+        <button onClick={() => handleViewTreatment(params.row.PreventationAndTreatment)}> View Treatment</button>
+      )
+    },
   ];
-  
+
   const augmentedHistory = history.map((item, index) => {
-    // console.log(item.prediction=='Early Blight' ? 'red' : 'green');
-    return { ...item, id: index };
+    return { ...item, id: index + 1};
   });
+
+  const handleViewTreatment = (treatment) => {
+    setSelectedTreatment(treatment);
+    setShowTreatment(true);
+  };
 
   useEffect(() => {
     if (!currentUser) {
@@ -70,6 +82,10 @@ function HistoryData() {
     fetchData();
   }, []);
 
+  const handleCloseTreatment = () => {
+    setShowTreatment(false);
+  };
+
   return (
     <main className='flex flex-col items-center justify-center'>
       <div className='flex flex-col items-center justify-center' style={{maxWidth:'40%'}}>
@@ -78,40 +94,31 @@ function HistoryData() {
       {currentUser ? (
         <div className='text-4xl font-bold mb-4' style={{ height: 500, width: 1200 , margin: 'auto', marginTop: '20px', marginBottom: '20px', padding: '20px',font: '16px Jost, sans-serif'}}>
           <DataGrid
-          style={{ width: '100%', height: '100%' ,fontSize: '16px', padding: '8px'}}
-          rows={augmentedHistory}
-          columns={columns}
-         pageSize={5}
-        rowsPerPageOptions={[5, 10, 20]}
-        disableSelectionOnClick
-        getRowId={(row) => row.id}
-        components={{
-       // Customizing the cell renderer
-       Cell: ({ value }) => (
-      <div style={{ fontSize: '16px', padding: '8px' }}>
-        {value}
-      </div>
-    ),
-  }}
-  // Customizing the row height
-   rowHeight={80}
-  // Customizing the header row height
-  headerHeight={80}
-  // Adding spacing between rows
-  rowSpacing={20}
-/>
-
+            style={{ width: '100%', height: '100%' ,fontSize: '16px', padding: '8px'}}
+            rows={augmentedHistory}
+            columns={columns}
+            pageSize={5}
+            rowsPerPageOptions={[5, 10, 20]}
+            disableSelectionOnClick
+            getRowId={(row) => row.id}
+            components={{
+              Cell: ({ value }) => (
+                <div style={{ fontSize: '16px', padding: '8px' }}>
+                  {value}
+                </div>
+              ),
+            }}
+            rowHeight={80}
+            headerHeight={80}
+            rowSpacing={20}
+          />
+          {showTreatment && (
+            <TreatmentModal treatment={selectedTreatment} onClose={handleCloseTreatment} />
+          )}
         </div>
       ) : (
         <div className='text-4xl font-bold mb-4'>
-        <p>Please logIn/Register to view history data.</p>
-        {/* <button
-        className="bg-pink-500 text-white active:bg-pink-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-        type="button"
-
-        >
-        Login/Register
-       </button> */}
+          <p>Please logIn/Register to view history data.</p>
         </div>
       )}
     </main>

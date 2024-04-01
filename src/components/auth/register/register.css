@@ -1,0 +1,105 @@
+/* Register.css */
+.requirements-container {
+    /* Positioning styles for your requirements list */
+  }
+  
+  .password-requirements {
+    /* Basic styling for the list */
+  }
+  
+  .password-requirements li {
+    /* Style for list items */
+  }
+  
+  .password-requirements .met {
+    color: green;
+    /* Other styles for met requirements */
+  }
+  
+  .password-requirements .unmet {
+    color: red;
+    /* Other styles for unmet requirements */
+  }
+  
+
+  .register-container {
+    /* Styles for your main container */
+  }
+  
+  .register-form {
+    /* Styles for your form */
+  }
+  
+  .password-field-container {
+    /* This container holds the password field and the requirements */
+    position: relative;
+  }
+  
+  .password-requirements {
+    list-style: none; /* Removes default list styling */
+    padding-left: 0; /* Aligns with the start of the input field */
+    margin-top: 8px; /* Give some space between the input field and the list */
+  }
+  
+  .password-requirements li {
+    /* Styles for list items */
+  }
+  .password-field-container {
+    margin-bottom: 1rem;
+  }
+  
+  .input-group {
+    display: flex;
+    align-items: center;
+    position: relative;
+  }
+  
+  .form-control {
+    width: 100%;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  }
+  
+  .input-group-addon {
+    cursor: pointer;
+    position: absolute;
+    right: 10px;
+  }
+  
+  /* Add your styles for password-requirements here */
+/* Styles for form input fields */
+.form-input {
+    width: 100%;
+    margin-top: 0.5rem; /* mt-2 in Tailwind */
+    padding: 0.75rem 1rem; /* px-3 py-2 in Tailwind */
+    font-size: 1.25rem; /* text-2xl in Tailwind */
+    color: #6b7280; /* text-gray-500 in Tailwind */
+    background-color: transparent; /* bg-transparent in Tailwind */
+    outline: none; /* outline-none in Tailwind */
+    border: 1px solid #d1d5db; /* border in Tailwind */
+    border-radius: 0.375rem; /* rounded-lg in Tailwind */
+    transition: border-color 0.3s; /* transition duration-300 in Tailwind */
+  }
+  
+  .form-input:focus {
+    border-color: #10b981; /* focus:border-green-600 in Tailwind */
+    box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.5); /* Tailwind's ring effect */
+  }
+  
+  
+  /* Styles for error message */
+  .error-message {
+    color: #ef4444; /* text-red-600 in Tailwind */
+    font-weight: bold; /* font-bold in Tailwind */
+  }
+  
+  /* Styles for password strength indicator */
+ 
+      

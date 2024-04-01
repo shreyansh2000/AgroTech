@@ -7,7 +7,7 @@ import Box from '@mui/material/Box';
 import Alert from '@mui/material/Alert';
 import Stack from '@mui/material/Stack';
 import CircularProgress from '@mui/material/CircularProgress';
-
+import { useNavigate } from 'react-router-dom';
 
 
 export default function UploadImageModal() {
@@ -17,6 +17,13 @@ export default function UploadImageModal() {
   const [imagePreview, setImagePreview] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
+  const [linkToDiseaseInfo, setLinkToDiseaseInfo] = useState('');
+
+
+  const handleRedirect = (diseasePrediction) => {
+    navigate(`/informationhub?search=${encodeURIComponent(diseasePrediction)}`); // Redirect to the Information Hub page with the search query
+  };
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
@@ -84,7 +91,15 @@ export default function UploadImageModal() {
         });
       }
 
-      setPrediction(response.data.prediction+" "+response.data.confidence);
+      const predictionText = response.data.prediction + " " + response.data.confidence;
+      setPrediction(predictionText);
+
+      if (!predictionText.toLowerCase().includes('healthy')) {
+        const diseaseName = response.data.prediction;
+        setLinkToDiseaseInfo(`/informationhub?search=${encodeURIComponent(diseaseName)}`);
+      } else {
+        setLinkToDiseaseInfo(''); // Reset link to empty if the leaf is healthy
+      }
 
     } catch (error) {
       console.error('Error making prediction:', error);
@@ -106,6 +121,7 @@ export default function UploadImageModal() {
 
   return (
     <>
+    
       <button
         className="bg-green-500 text-white font-bold uppercase py-3 px-6 rounded shadow hover:shadow-lg"
         type="button"
@@ -206,6 +222,12 @@ export default function UploadImageModal() {
             {prediction && (
               <div className="text-lg mt-5">Prediction: {prediction}</div>
             )}
+
+{prediction && !prediction.toLowerCase().includes('healthy') && linkToDiseaseInfo && (
+      <a href={linkToDiseaseInfo} className="mt-3 text-blue-600 hover:underline">
+        Learn more about this disease
+      </a>
+    )}
           </>
         )}
       </Box>

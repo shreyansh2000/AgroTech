@@ -4,11 +4,15 @@ import SearchBar from './SearchBar';
 import './InformationHub.css';
 import { animated, useSpring } from 'react-spring';
 
+
 function InformationHub() {
   const [allDiseases, setAllDiseases] = useState([]); // All diseases
   const [diseases, setDiseases] = useState([]); // Filtered diseases for display
   const [selectedDisease, setSelectedDisease] = useState(null);
   const [searchMessage, setSearchMessage] = useState(""); // Message to display for search result
+  const [searchValue, setSearchValue] = useState('');
+  const [displayedDisease, setDisplayedDisease] = useState(null);
+  const [filteredDiseases, setFilteredDiseases] = useState([]);
 
   const fadeIn = useSpring({
     from: { opacity: 0 },
@@ -16,10 +20,23 @@ function InformationHub() {
     config: { duration: 1000 },
   });
 
+  
+
   useEffect(() => {
     fetch('/tomato_diseases.json')
       .then((response) => response.json())
       .then((data) => {
+
+        
+        const searchParams = new URLSearchParams(window.location.search);
+        const searchQuery = searchParams.get('search');
+      if (searchQuery) {
+      const decodedSearchQuery = decodeURIComponent(searchQuery);
+      setSearchValue(decodedSearchQuery); // Update the searchValue state
+      handleSearch(decodedSearchQuery); // You might need to call some function to handle the search
+    }
+      
+  
         const sortedData = data.sort((a, b) => a.name.localeCompare(b.name));
         setAllDiseases(sortedData);
         setDiseases(sortedData); // Initially, display all diseases
@@ -28,7 +45,19 @@ function InformationHub() {
       .catch((error) => console.error('Error fetching diseases:', error));
   }, []);
 
+  useEffect(() => {
+    // Effect to handle search query from URL parameters
+    const searchParams = new URLSearchParams(window.location.search);
+    const searchQuery = searchParams.get('search');
+    if (searchQuery) {
+      const decodedSearchQuery = decodeURIComponent(searchQuery.replace(/\+/g, ' '));
+      setSearchValue(decodedSearchQuery); // Set the input value for the search bar
+      handleSearch(decodedSearchQuery); // Update the filtered diseases
+    }
+  }, [allDiseases]);
+
   const handleSearch = (searchText) => {
+    setSearchValue(searchText);
     if (!searchText.trim()) {
       // If the search text is empty, reset to the full list of diseases
       setDiseases(allDiseases);
@@ -39,7 +68,15 @@ function InformationHub() {
       const filtered = allDiseases.filter((disease) =>
         disease.name.toLowerCase().includes(searchText.toLowerCase())
       );
+      const simulateDeleteKeyPress = () => {
+        if (searchValue.length > 0) {
+          const updatedSearchValue = searchValue.slice(0, -1);
+          setSearchValue(updatedSearchValue);
+          handleSearch(updatedSearchValue);
+        }
+      };
       setDiseases(filtered);
+      setFilteredDiseases(filtered);
       setSelectedDisease(filtered.length > 0 ? filtered[0] : null);
       setSearchMessage(filtered.length > 0 ? "" : "Please Select Proper Input");
     }
@@ -47,6 +84,7 @@ function InformationHub() {
 
   return (
     <>
+ 
     <animated.div className="information-hub-container" style={{ ...fadeIn }}>
       <div className="sidebar">
         <SearchBar onSearch={handleSearch} />

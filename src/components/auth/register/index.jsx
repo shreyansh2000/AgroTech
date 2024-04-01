@@ -6,6 +6,7 @@ import { Icon } from 'react-icons-kit';
 import { eyeOff } from 'react-icons-kit/feather/eyeOff';
 import { eye } from 'react-icons-kit/feather/eye';
 import { validatePassword, getColorForStrength, handleToggle } from './passwordUtils'; // Importing functions from passwordUtils
+import './register.css';
 
 const Register = () => {
     const navigate = useNavigate();
@@ -29,6 +30,7 @@ const Register = () => {
     useEffect(() => {
         const { strength, suggestions } = validatePassword(password);
         setStrength(strength);
+        setRequirements(validatePassword(password));
         setSuggestions(suggestions);
     }, [password]);
 
@@ -47,23 +49,96 @@ const Register = () => {
 
     const onSubmit = async (e) => {
         e.preventDefault();
+    
+        // Check if the password strength is not 'Very Strong'
+        if (strength !== 'Very Strong') {
+            setErrorMessage('Password strength is too weak, please try again!');
+            setIsRegistering(false); // Reset the registering state if the check fails
+            return; // Prevent form submission
+        }
+        
+        if (password !== confirmPassword) {
+            setErrorMessage('Passwords do not match.');
+            return; // Prevent form submission if passwords do not match
+        }
+
         if (!isRegistering) {
             setIsRegistering(true);
-            await fetch('https://tomatocrop-66f6d-default-rtdb.firebaseio.com/users.json', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    username,
-                }),
-            });
-            await doCreateUserWithEmailAndPassword(email, password);
+            setErrorMessage(''); // Clear any previous error messages
+    
+            try {
+                // Assuming doCreateUserWithEmailAndPassword and other sign-up logic are async operations
+                await fetch('https://tomatocrop-66f6d-default-rtdb.firebaseio.com/users.json', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        username,
+                    }),
+                });
+                await doCreateUserWithEmailAndPassword(email, password);
+                // Navigate or handle success scenario
+            } catch (error) {
+                // Handle any errors that occur during the sign-up process
+                setErrorMessage(error.message);
+            } finally {
+                setIsRegistering(false); // Reset the registering state after the operation
+            }
         }
     };
+    
+
+    const [requirements, setRequirements] = useState({
+    minLength: false,
+    oneNumber: false,
+    oneUpper: false,
+    oneLower: false,
+    oneSpecial: false,
+  });
+
+  useEffect(() => {
+    const newRequirements = {
+      minLength: password.length >= 8,
+      oneNumber: /\d/.test(password),
+      oneUpper: /[A-Z]/.test(password),
+      oneLower: /[a-z]/.test(password),
+      oneSpecial: /[^A-Za-z0-9]/.test(password),
+    };
+    setRequirements(newRequirements);
+  }, [password]);
+
+  const RequirementItem = ({ fulfilled, text }) => {
+    return (
+      <li style={{ color: fulfilled ? 'green' : 'red' }}>
+        {fulfilled ? <span>✔</span> : <span>✖</span>} {text}
+      </li>
+    );
+  };
+
+  const renderRequirementItem = (condition, message) => {
+    return (
+      <li style={{ color: condition ? 'green' : 'red' }}>
+        {condition ? '✔️' : '❌'} {message}
+      </li>
+    );
+  };
+ 
+  const requirementTexts = {
+    minLength: "Password should be at least 8 characters long",
+    oneNumber: "Add at least one number",
+    oneUpper: "Include at least one uppercase letter",
+    oneLower: "Include at least one lowercase letter",
+    oneSpecial: "Include at least one special character",
+  };
+  
+
+  
 
     return (
+
         <>
+
             {userLoggedIn && <Navigate to={'/home'} replace={true} />}
             <img
                 src="./assets/image.png"
@@ -77,6 +152,10 @@ const Register = () => {
                     bottom: 200,
                 }}
             />
+             
+             
+        
+
         <main className="w-full h-screen flex place-content-center place-items-center">
             <div className="h-75% w-3/5 md:w-4/5 lg:w-3/5 xl:w-2/5 text-gray-600 space-y-5 p-8 shadow-xl border rounded-xl" style={{ borderColor: '#39B68D' }}>
                 <div className="text-center">
@@ -111,23 +190,38 @@ const Register = () => {
                             className="w-full mt-2 px-3 py-2 text-2xl text-gray-500 bg-transparent outline-none border focus:green-600 shadow-sm rounded-lg transition duration-300"
                         />
                     </div>
-                    <div>
-                        <label className="text-3xl text-gray-600 font-bold">Password</label>
-                        <input
-                            disabled={isRegistering}
-                            type={passwordType}
-                            autoComplete="new-password"
-                            required
-                            value={password}
-                            onChange={(e) => {
-                                setPassword(e.target.value);
-                            }}
-                            className="w-full mt-2 px-3 py-2 text-2xl text-gray-500 bg-transparent outline-none border focus:border-green-600 shadow-sm rounded-lg transition duration-300"
-                        />
-                        <span className="absolute text-3xl justify-around items-center" onClick={() => handleToggle('password', passwordType, setPasswordType)}>
-                            <Icon className="absolute right-3 top-4 " icon={passwordIcon} />
-                        </span>
-                    </div>
+
+
+        <div className="password-field-container">
+          <label className="text-3xl text-gray-600 font-bold">Password</label>
+          
+          <div className="input-group">
+    <input
+      type={passwordType}
+      id="password"
+      name="password"
+      required
+      value={password}
+      onChange={(e) => setPassword(e.target.value)}
+      className="form-control"
+    />
+    <span className="input-group-addon" onClick={() => handleToggle('password')}>
+      <Icon icon={passwordIcon} size={20} />
+    </span>
+  </div>
+          
+
+          {/* Displaying password requirements */}
+          <div className="password-requirements">
+            {Object.keys(requirements).map((key) => (
+              <div key={key} className={requirements[key] ? 'requirement-fulfilled' : 'requirement-unfulfilled'}>
+                {requirements[key] ? '✔ ' : '✖ '}
+                {requirementTexts[key]}
+              </div>
+            ))}
+          </div>
+        </div>
+
                     <div>
                         <label className="text-3xl text-gray-600 font-bold">Confirm Password</label>
                         <input
@@ -147,22 +241,17 @@ const Register = () => {
                     </div>
                     {errorMessage && <span className="text-red-600 font-bold">{errorMessage}</span>}
                     {strength && <div className="text-xl text-gray-600">Password Strength: <span style={{ color: getColorForStrength(strength) }}>{strength}</span></div>}
-                    {suggestions.length > 0 && (
-                        <div className="text-red-600 font-bold absolute bg-gray-100 border border-gray-300 rounded-lg p-2 mt-2">
-                            <ul>
-                                {suggestions.map((suggestion, index) => (
-                                    <li key={index} className='text-2xl text-red-600'>{suggestion}</li>
-                                ))}
-                            </ul>
-                        </div>  
-                    )}
+                    
                     <button
                         type="submit"
                         disabled={isRegistering}
                         className={`w-full text-2xl px-4 py-2 text-white font-medium rounded-lg ${
                             isRegistering ? 'bg-gray-300 cursor-not-allowed' : 'bg-green-600 hover:bg-green-700 hover:shadow-xl transition duration-300'
-                        }`}
+                        }`
+                        
+                    }
                     >
+                        
                         {isRegistering ? 'Signing Up...' : 'Sign Up'}
                     </button>
                     <div className="text-3xl text-center">
@@ -171,9 +260,13 @@ const Register = () => {
                             Continue
                         </Link>
                     </div>
+
+                    
                 </form>
             </div>
+            
         </main>
+        
         </>
     );
 };
