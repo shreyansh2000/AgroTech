@@ -12,12 +12,13 @@ import {
 } from "./passwordUtils"; // Importing functions from passwordUtils
 import "./register.css";
 
+
 const Register = () => {
   const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [username, setUsername] = useState("");
+  const [Firstname, setFirstname] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [isRegistering, setIsRegistering] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
@@ -68,7 +69,10 @@ const Register = () => {
       setIsRegistering(true);
       setErrorMessage(""); // Clear any previous error messages
 
+
+      
       try {
+
         // Assuming doCreateUserWithEmailAndPassword and other sign-up logic are async operations
         await fetch(
           "https://tomatocrop-66f6d-default-rtdb.firebaseio.com/users.json",
@@ -78,10 +82,11 @@ const Register = () => {
               "Content-Type": "application/json",
             },
             body: JSON.stringify({
-              username,
+              Firstname,
             }),
           }
         );
+  
         await doCreateUserWithEmailAndPassword(email, password);
         // Navigate or handle success scenario
       } catch (error) {
@@ -127,7 +132,7 @@ const Register = () => {
       </li>
     );
   };
-
+ 
   const requirementTexts = {
     minLength: "Password should be at least 8 characters long",
     oneNumber: "Add at least one number",
@@ -173,9 +178,9 @@ const Register = () => {
                 type="text"
                 autoComplete="text"
                 required
-                value={username}
+                value={Firstname}
                 onChange={(e) => {
-                  setUsername(e.target.value);
+                  setFirstname(e.target.value);
                 }}
                 className="w-full mt-2 px-3 py-2 text-3xl text-gray-500 bg-transparent outline-none border focus:green-600 shadow-sm rounded-lg transition duration-300"
               />
