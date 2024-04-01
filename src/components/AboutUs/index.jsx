@@ -25,7 +25,7 @@ function AboutUs() {
     <h3>Sanjay Patel</h3>
     
   
-    <p>shreyanshdalwadi@gmail.com</p>
+    <p>patel7e6@uwindsor.ca</p>
 
     <ul className="team-icon">
     
@@ -54,7 +54,7 @@ function AboutUs() {
                       
                      
 
-                      <p>shreyanshdalwadi@gmail.com</p>
+                      <p>dalwadi2@uswindsor.ca</p>
                   
                       <ul class="team-icon">
                       
@@ -80,7 +80,7 @@ function AboutUs() {
                       <img src="./assets/NrupPatel.png" class="team-img" alt="pic" />
                      
                       <h3>Nrup Patel</h3>
-                      <p>shreyanshdalwadi@gmail.com</p>
+                      <p>patel616@uwindsor.ca</p>
                   
                       <ul class="team-icon">
                       
@@ -106,11 +106,11 @@ function AboutUs() {
                   
                       <img src="./assets/Abhishek.jpeg"  class="team-img" alt="pic" />
                      
-                      <h3>ABHISHEK</h3>
+                      <h3>ABHISHEK Yawalkar</h3>
                       
                      
 
-                      <p>shreyanshdalwadi@gmail.com</p>
+                      <p>yawalka@uwindsor.ca</p>
                   
                       <ul class="team-icon">
                       

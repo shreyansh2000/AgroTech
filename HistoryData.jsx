@@ -26,7 +26,11 @@ function HistoryData() {
         <>
           {params.value}
           {/* Add a check to not display the link for 'Healthy' prediction */}
-          
+          {params.value !== 'Healthy' && (
+            <Link to={`/informationhub?search=${encodeURIComponent(params.value)}`} className="link">
+              Info
+            </Link>
+          )}
         </>
       ),
     },
