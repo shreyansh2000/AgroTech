@@ -1,9 +1,11 @@
 import React from 'react';
 // import { useAuth } from '../../contexts/authContext';
-import { FaLeaf } from 'react-icons/fa6';
+
 import { IoIosArrowForward } from 'react-icons/io';
-import { GiMedicinePills } from 'react-icons/gi';
-import { LiaPrescriptionBottleSolid } from 'react-icons/lia';
+import { FaCameraRetro } from "react-icons/fa"
+import { FaStethoscope } from "react-icons/fa";
+import { FaBriefcaseMedical } from "react-icons/fa";
+
 import { animated, useSpring } from 'react-spring';
 import CameraModal from '../Modal/CameraModal';
 import UploadImageModal from '../Modal/UploadImageModal';
@@ -36,16 +38,16 @@ const Home = () => {
               </div>
               <div className="p-5 text-3xl flex items-center">
                 <div className="flex flex-col items-center">
-                  <FaLeaf className="mb-2 mr-4 text-green-500" />
+                  <FaCameraRetro className="mb-2 mr-6 " />
                   <a>
                     <h6 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                      Take/Upload Image
+                      Take a Picture
                     </h6>
                   </a>
                 </div>
                 <IoIosArrowForward className="mr-4 text-gray-400" />
                 <div className="flex flex-col items-center">
-                  <GiMedicinePills className="mb-2 mr-4 text-blue-500" />
+                  <FaStethoscope className="mb-2 mr-6 " />
                   <a>
                     <h6 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                       See Diagnosis
@@ -54,7 +56,7 @@ const Home = () => {
                 </div>
                 <IoIosArrowForward className="mr-4 text-gray-400" />
                 <div className="flex flex-col items-center">
-                  <LiaPrescriptionBottleSolid className="mb-2 mr-4 text-purple-500" />
+                  <FaBriefcaseMedical className="mb-2 mr-6" />
                   <a>
                     <h6 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                       Get Medicine
@@ -69,7 +71,7 @@ const Home = () => {
           <animated.div className="flex flex-col items-center justify-center p-8 text-center bg-white border-b border-gray-200 rounded-t-lg md:rounded-t-none md:rounded-ss-lg md:border-e dark:bg-gray-800 dark:border-gray-700">
             <div className="p-10">
               <a>
-                <h5 className="mb-2 text-4xl font-bold tracking-tight text-gray-900 dark:text-white">
+                <h5 className="mb-5 text-4xl font-bold tracking-tight text-gray-900 dark:text-white">
                   Take a Picture
                 </h5>
               </a>
@@ -81,7 +83,7 @@ const Home = () => {
           <animated.div className="flex flex-col items-center justify-center p-8 text-center bg-white border-b border-gray-200 rounded-t-lg md:rounded-t-none md:rounded-ss-lg md:border-e dark:bg-gray-800 dark:border-gray-700">
             <div className="p-10">
               <a>
-                <h5 className="mb-2 text-4xl font-bold tracking-tight text-gray-900 dark:text-white">
+                <h5 className="mb-5 text-4xl font-bold tracking-tight text-gray-900 dark:text-white">
                   Upload an Image
                 </h5>
               </a>

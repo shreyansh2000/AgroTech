@@ -110,8 +110,8 @@ function HistoryData() {
 
   return (
     <main className='flex flex-col items-center justify-center'>
-      <div className='flex flex-col items-center justify-center' style={{maxWidth:'40%'}}>
-        <h1 className='text-4xl font-bold mb-4'>History</h1>
+      <div className='flex flex-col items-center justify-center' style={{maxWidth:'40%',marginTop:'60px'}}>
+        <h1 className='text-6xl font-bold mb-6'>History</h1>
       </div>
       {currentUser ? (
         <div className='text-4xl font-bold mb-4' style={{ height: 500, width: 1200 , margin: 'auto', marginTop: '20px', marginBottom: '20px', padding: '20px',font: '16px Jost, sans-serif'}}>

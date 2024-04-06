@@ -7,8 +7,6 @@ import Home from "./components/home";
 import InformationHub from "./components/InformationHub";
 import { AuthProvider } from "./contexts/authContext";
 import { useRoutes } from "react-router-dom";
-import { useState } from 'react';
-import YourComponent from "./components/IntegrateModel";
 import HistoryPage from "./components/History";
 import ResetPassword from "./components/auth/reset";
 

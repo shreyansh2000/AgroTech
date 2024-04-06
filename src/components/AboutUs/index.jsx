@@ -10,7 +10,7 @@ function AboutUs() {
     <div className="container">
 
     <div className="col-xl-12s text-center">
-        <h1 style={{fontSize:40}}>The Team Behind Project</h1>
+      
     </div> 
 
  

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { doc, collection, addDoc } from "firebase/firestore";
+import { doc, collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { db } from "../../firebase/firebase";
 import { auth } from "../../firebase/firebase";
 import { useAuth } from '../../contexts/authContext';
@@ -9,6 +9,7 @@ import Alert from "@mui/material/Alert";
 import Stack from "@mui/material/Stack";
 import CircularProgress from "@mui/material/CircularProgress";
 import { useNavigate } from "react-router-dom";
+
 
 
 
@@ -92,7 +93,8 @@ export default function UploadImageModal() {
         await addDoc(collection(userDocRef, "data"), {
           imageUri: imagePreview,
           prediction: response.data.prediction,
-          confidence: response.data.confidence
+          confidence: response.data.confidence,
+          timestamp: serverTimestamp()
         });
       }
 

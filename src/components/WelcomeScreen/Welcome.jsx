@@ -1,6 +1,7 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
 import { animated, useSpring } from 'react-spring';
+import './Welcome.css';
 
 function Welcome() {
 
@@ -45,6 +46,13 @@ function Welcome() {
     cursor: 'pointer',
    
   };
+  const Screen={
+    height: '100vh',
+    display:'flex',
+    width: '100%',
+    color: 'black'
+  
+  }
 
  function goTologin()
  {
@@ -62,11 +70,11 @@ function Welcome() {
   return (
     <>
   
-  <div>
-    <animated.div className="h-screen w-screen bg-black flex" style={{ ...fadeIn }}>
+  <div >
+    <animated.div className='screen' style={Screen}>
       {/* Left Side of Screen*/}
       
-      <div className='h-full w-6/12 bg-[#39B68D]'>
+      <div className='left-side h-full w-6/12 bg-[#39B68D]'>
   
         
       <img
@@ -76,8 +84,8 @@ function Welcome() {
               height: 120,
               width: 120,
               borderRadius: 20, 
-              position: "absolute",
-              top: 150, 
+              position: "relative",
+              top: 140, 
               left: 480,
             }}
           />
@@ -89,9 +97,9 @@ function Welcome() {
               height: 150,
               width: 150,
               borderRadius: 20,
-              position: "absolute",
-              top: 240,
-              left: 250,
+              position: "relative",
+              top: 140,
+              left: 270,
               transform: [
                 { translateX: 50 },
                 { translateY: 50 },
@@ -107,8 +115,8 @@ function Welcome() {
               height: 200,
               width: 200,
               borderRadius: 20,
-              position: "absolute",
-              top: 450,
+              position: "relative",
+              top: 170,
               left: 100,
               transform: [
                 { translateX: 50 },
@@ -124,8 +132,8 @@ function Welcome() {
               height: 250,
               width: 250,
               borderRadius: 20,
-              position: "absolute",
-              top: 550,
+              position: "relative",
+              top: 100,
               left: 400,
               transform: [
                 { translateX: 50 },
@@ -140,7 +148,7 @@ function Welcome() {
 
 
         {/* Right Side of Screen*/}
-      <div className='h-full w-6/12' style={{ background:   '#39B68D' }}>
+      <div className='right-side h-full w-6/12' style={{ background:'#39B68D' }}>
       <div style={{
         paddingHorizontal: 22,
         position: "relative",

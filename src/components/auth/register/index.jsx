@@ -5,6 +5,7 @@ import { doCreateUserWithEmailAndPassword } from "../../../firebase/auth";
 import { Icon } from "react-icons-kit";
 import { eyeOff } from "react-icons-kit/feather/eyeOff";
 import { eye } from "react-icons-kit/feather/eye";
+import { getDatabase, ref, set } from "firebase/database";
 import {
   validatePassword,
   getColorForStrength,
@@ -14,7 +15,6 @@ import "./register.css";
 
 const Register = () => {
   const navigate = useNavigate();
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [firstName, setfirstname] = useState("");
@@ -28,7 +28,7 @@ const Register = () => {
   const [strength, setStrength] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const [showPasswordInfo, setShowPasswordInfo] = useState(false); // State to manage whether to show password info or not
-
+  const [emailVerificationPending, setEmailVerificationPending] = useState(false); // State to track email verification status
   const { userLoggedIn } = useAuth();   
 
   useEffect(() => {
@@ -47,43 +47,41 @@ const Register = () => {
       setConfirmPasswordType(newType);
       setConfirmPasswordIcon(newType === "password" ? eyeOff : eye);
     }
-  };
-
-  const onSubmit = async (e) => {
-    e.preventDefault();
-
+  };const onSubmit = async (e) => {
+    e.preventDefault(); // Prevent default form submission behavior
+  
     // Check if the password strength is not 'Very Strong'
     if (strength !== "Very Strong") {
       setErrorMessage("Password strength is too weak, please try again!");
-      setIsRegistering(false); // Reset the registering state if the check fails
       return; // Prevent form submission
     }
-
+  
     if (password !== confirmPassword) {
       setErrorMessage("Passwords do not match.");
       return; // Prevent form submission if passwords do not match
     }
-
+  
     if (!isRegistering) {
       setIsRegistering(true);
       setErrorMessage(""); // Clear any previous error messages
-
+  
       try {
-        // Assuming doCreateUserWithEmailAndPassword and other sign-up logic are async operations
-        await fetch(
-          "https://tomatocrop-66f6d-default-rtdb.firebaseio.com/users.json",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              firstName,
-            }),
-          }
-        );
-        await doCreateUserWithEmailAndPassword(email, password);
-        // Navigate or handle success scenario
+        // Register the user
+        const userCredential = await doCreateUserWithEmailAndPassword(email, password);
+        const user = userCredential.user;
+        console.log('Registered with email: ', user.email);
+        
+        // Save the first name to the database
+        const db = getDatabase();
+        await set(ref(db, 'users/' + user.uid), {
+          firstName: firstName,
+        });
+
+
+        setEmailVerificationPending(true);
+        
+  
+        
       } catch (error) {
         // Handle any errors that occur during the sign-up process
         setErrorMessage(error.message);
@@ -91,8 +89,9 @@ const Register = () => {
         setIsRegistering(false); // Reset the registering state after the operation
       }
     }
-  };
 
+  
+  };
   const [requirements, setRequirements] = useState({
     minLength: false,
     oneNumber: false,
@@ -138,7 +137,7 @@ const Register = () => {
 
   return (
     <>
-      {userLoggedIn && <Navigate to={"/home"} replace={true} />}
+      {/* {userLoggedIn && <Navigate to={"/login"} replace={true} />} */}
       <img
         src="./assets/image.png"
         style={{
@@ -151,6 +150,18 @@ const Register = () => {
           bottom: 200,
         }}
       />
+
+        {emailVerificationPending && (
+        <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
+          <strong className="font-bold">Verify your email to login!</strong>
+          <span className="absolute top-0 bottom-0 right-0 px-4 py-3">
+            <svg className="fill-current h-6 w-6 text-green-500" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" onClick={() => setEmailVerificationPending(false)}>
+              <title>Close</title>
+              <path d="M14.348 14.849c-.195.196-.452.294-.708.294s-.512-.098-.708-.293L10 11.707l-2.932 2.935c-.391.39-1.023.39-1.414 0-.39-.391-.39-1.023 0-1.414L8.586 10 5.654 7.068c-.39-.39-.39-1.023 0-1.414s1.023-.39 1.414 0L10 8.293l2.932-2.935c.39-.39 1.023-.39 1.414 0 .39.391.39 1.023 0 1.414L11.414 10l2.934 2.932c.39.39.39 1.023 0 1.414z"/>
+            </svg>
+          </span>
+        </div>
+      )}
 
       <main className="w-full h-screen flex place-content-center place-items-center">
         <div
