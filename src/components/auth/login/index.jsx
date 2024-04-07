@@ -52,7 +52,9 @@ const Login = () => {
             doSignInWithGoogle().catch(err => {
                 setIsSigningIn(false)
             })
+            
         }
+
     }
     return (
 <>

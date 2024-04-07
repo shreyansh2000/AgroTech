@@ -140,7 +140,7 @@ function Welcome() {
                 { translateY: 50 },
                 { rotate: "80deg" }
               ]
-            }}
+            }}  
           />  
           
            </div>

@@ -26,6 +26,7 @@ function AboutUs() {
     
   
     <p>patel7e6@uwindsor.ca</p>
+    <p>AI/ML Developer</p>
 
     <ul className="team-icon">
     
@@ -54,7 +55,8 @@ function AboutUs() {
                       
                      
 
-                      <p>dalwadi2@uswindsor.ca</p>
+                      <p>dalwadi2@uwindsor.ca</p>
+                      <p>Website Developer</p>
                   
                       <ul class="team-icon">
                       
@@ -81,6 +83,7 @@ function AboutUs() {
                      
                       <h3>Nrup Patel</h3>
                       <p>patel616@uwindsor.ca</p>
+                      <p>Mobile App Developer</p>
                   
                       <ul class="team-icon">
                       
@@ -111,6 +114,7 @@ function AboutUs() {
                      
 
                       <p>yawalka@uwindsor.ca</p>
+                      <p>Mobile App Developer</p>
                   
                       <ul class="team-icon">
                       

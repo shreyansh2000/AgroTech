@@ -2,6 +2,11 @@ import React, { useState, useRef, useEffect } from "react";
 import axios from "axios";
 import Stack from "@mui/material/Stack";
 import Alert from "@mui/material/Alert";
+import { doc, collection, addDoc, serverTimestamp } from "firebase/firestore";
+import { db } from "../../firebase/firebase";
+import { auth } from "../../firebase/firebase";
+import { useAuth } from '../../contexts/authContext';
+
 
 export default function CameraModal() {
   const [showModal, setShowModal] = useState(false);
@@ -54,6 +59,16 @@ export default function CameraModal() {
           },
         }
       );
+      if (auth.currentUser && !auth.currentUser.isAnonymous) {
+        const userDocRef = doc(db, "results", auth.currentUser.uid);
+        await addDoc(collection(userDocRef, "data"), {
+          imageUri: imageSrc,
+          prediction: result.data.prediction,
+          confidence: result.data.confidence,
+          timestamp: serverTimestamp()
+        });
+      }
+
 
       setPrediction(result.data.prediction+" with confidence of "+result.data.confidence);
 
