@@ -47,7 +47,9 @@ const Register = () => {
       setConfirmPasswordType(newType);
       setConfirmPasswordIcon(newType === "password" ? eyeOff : eye);
     }
-  };const onSubmit = async (e) => {
+  };
+  
+  const onSubmit = async (e) => {
     e.preventDefault(); // Prevent default form submission behavior
   
     // Check if the password strength is not 'Very Strong'
@@ -66,6 +68,9 @@ const Register = () => {
       setErrorMessage(""); // Clear any previous error messages
   
       try {
+      
+        
+
         // Register the user
         const userCredential = await doCreateUserWithEmailAndPassword(email, password);
         const user = userCredential.user;
@@ -77,8 +82,6 @@ const Register = () => {
           firstName: firstName,
         });
 
-
-        setEmailVerificationPending(true);
         
   
         

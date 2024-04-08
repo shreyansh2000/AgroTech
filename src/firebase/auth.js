@@ -19,9 +19,6 @@ export const doCreateUserWithEmailAndPassword = async (email, password) => {
     url: `${window.location.origin}/verify-email`, // Adjust the URL as needed
   });
   
-
-  
-  
   return userCredential;
 };
 

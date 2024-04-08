@@ -78,7 +78,7 @@ function Welcome() {
   
         
       <img
-            src="./assets/welcome_screen_image.png"
+            src="./assets/tomato.png"
             className="transform rotate-90 ..."
             style={{
               height: 120,
@@ -91,7 +91,7 @@ function Welcome() {
           />
  
          <img
-            src="./assets/welcome_screen_image.png"
+            src="./assets/tomato.png"
             className="transform rotate-45 ..."
             style={{
               height: 150,
@@ -109,7 +109,7 @@ function Welcome() {
           />
 
           <img
-           src="./assets/welcome_screen_image.png"
+           src="./assets/tomato.png"
            className="transform rotate-12 ..."
             style={{
               height: 200,
@@ -126,7 +126,7 @@ function Welcome() {
             }}
           />  
             <img
-           src="./assets/welcome_screen_image.png"
+           src="./assets/tomato.png"
            className="transform rotate-0 ..."
             style={{
               height: 250,
