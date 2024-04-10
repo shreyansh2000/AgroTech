@@ -82,7 +82,7 @@ const Register = () => {
           firstName: firstName,
         });
 
-        
+        setEmailVerificationPending(true);
   
         
       } catch (error) {
